@@ -9,7 +9,7 @@ class App extends React.Component {
       data: [],
       hotelId: "",
       date: "",
-      nights: ""
+      nights: 0
     }
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleChangeNights = this.handleChangeNights.bind(this);
@@ -72,60 +72,81 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <form className="form-container" action="" method="get">
-          <h3>Elige un hotel</h3>
-          <div>
-            <label htmlFor="44069509"></label>
-            <input
-              type="radio"
-              className="form-input"
-              id="44069509"
-              name="hotel"
-              value={this.state.hotelId}
-              onChange={this.handleChangeHotel}
-            /> Hotel Baqueira Val de Neu
+          <fieldset class="form-group">
+            <div className="row">
+              <legend className="col-form-label col-sm-2 pt-0">Elige hotel:</legend>
+              <div class="col-sm-10">
+                <div className="form-check">
+                  <label className="form-check-label" htmlFor="44069509">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      id="44069509"
+                      name="hotel"
+                      value={this.state.hotelId}
+                      onChange={this.handleChangeHotel}
+                    />
+                    Hotel Baqueira Val de Neu</label>
+                </div>
+                <div className="form-check">
+                  <label className="form-check-label" htmlFor="10030559">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      id="10030559"
+                      name="hotel"
+                      value={this.state.hotel}
+                      onChange={this.handleChangeHotel}
+                    />
+                    Hotel Moderno</label>
+                </div>
+                <div className="form-check">
+                  <label className="form-check-label" htmlFor="100376478">
+                    <input
+                      type="radio"
+                      className="form-check-input"
+                      id="100376478"
+                      name="hotel"
+                      value={this.state.hotel}
+                      onChange={this.handleChangeHotel}
+                    />
+                    Hotel Grand Luxor</label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label" htmlFor="date-checkIn">Fecha del check-in</label>
+            <div class="col-sm-10">
+              <input
+                type="date"
+                className="form-control"
+                id="date-checkIn"
+                name="date-checkIn"
+                value={this.state.date}
+                onChange={this.handleChangeDate} />
+            </div>
           </div>
-          <div>
-            <label htmlFor="10030559"></label>
-            <input
-              type="radio"
-              className="form-input"
-              id="10030559"
-              name="hotel"
-              value={this.state.hotel}
-              onChange={this.handleChangeHotel}
-            /> Hotel Moderno
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label" htmlFor="nights">Número de noches</label>
+            <div class="col-sm-10">
+              <input
+                type="number"
+                className="form-control"
+                id="nights"
+                name="nights"
+                min="1"
+                max="30"
+                value={this.state.nights}
+                onChange={this.handleChangeNights}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="100376478"></label>
-            <input
-              type="radio"
-              className="form-input"
-              id="100376478"
-              name="hotel"
-              value={this.state.hotel}
-              onChange={this.handleChangeHotel}
-            /> Hotel Grand Luxor
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="button" className="btn btn-primary" onClick={this.handleSearch}>Buscar</button>
+            </div>
           </div>
-          <label htmlFor="date-checkIn">Fecha del check-in</label>
-          <input
-            type="date"
-            className="form-input"
-            id="date-checkIn"
-            name="date-checkIn"
-            value={this.state.date}
-            onChange={this.handleChangeDate} />
-          <label htmlFor="nights">Número de noches</label>
-          <input
-            type="number"
-            className="form-input"
-            id="nights"
-            name="nights"
-            min="1"
-            max="30"
-            value={this.state.nights}
-            onChange={this.handleChangeNights}
-          />
-          <button onClick={this.handleSearch}>Buscar</button>
         </form>
       </React.Fragment>
     );
