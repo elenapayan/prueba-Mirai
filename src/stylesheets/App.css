@@ -8,3 +8,28 @@
 .col-sm-2 {
   min-width: 180px;
 }
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+}
+.card-list {
+  margin: 5px;
+  border: 5px solid antiquewhite;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+}
+.list-item {
+  text-align: center;
+}
+.occupancy-items {
+  display: inline-block;
+  margin: 0 5px;
+}
