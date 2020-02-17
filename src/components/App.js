@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       data: [],
       hotelId: "",
-      date: "",
+      checkin: "",
       nights: ""
     }
     this.handleChange = this.handleChange.bind(this);
@@ -28,16 +28,19 @@ class App extends React.Component {
   // }
 
 
-  // function
-  // const f = new Date();
-  // document.write(f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear());
-
-
-  isValidated() {
-    const { hotelId, date, nights } = this.state;
-    // const validDate =
-    // const validNigths =
-    if (hotelId && date && nights) {
+  formValidated() {
+    const { hotelId, nights } = this.state;
+    let checkin = this.state.checkin;
+    checkin = checkin.split("-").join("");
+    const f = new Date();
+    const year = (f.getFullYear()).toString();
+    let month = (f.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = "0" + month;
+    }
+    const day = f.getDate().toString();
+    const date = (year + month + day);
+    if (hotelId && (checkin >= date) && nights) {
       return true;
     } else {
       return false;
@@ -51,10 +54,9 @@ class App extends React.Component {
   handleSearch(ev) {
     const hotelId = parseInt(this.state.hotelId);
     const nights = parseInt(this.state.nights);
-    const date = (this.state.date).split("-").reverse().join("/");
-    const url = `https://api-pre.mirai.com/MiraiWebService/availableRate/get?hotelId=${hotelId}&checkin=${date}&nights=${nights}`;
-
-    if (this.isValidated() === true) {
+    const checkin = (this.state.checkin).split("-").reverse().join("/");
+    const url = `https://api-pre.mirai.com/MiraiWebService/availableRate/get?hotelId=${hotelId}&checkin=${checkin}&nights=${nights}`;
+    if (this.formValidated() === true) {
       fetch(url, {
         headers: { 'Authorization': `Basic ${btoa('user1:user1Pass')}` }
       })
@@ -74,12 +76,13 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.data);
+    this.formValidated();
     return (
       <React.Fragment>
 
         <Switch>
           <Route exact path="/">
-            <UserForm handleChange={this.handleChange} hotelId={this.state.hotelId} date={this.state.date} nights={this.state.nights} handleSearch={this.handleSearch} />
+            <UserForm handleChange={this.handleChange} hotelId={this.state.hotelId} checkin={this.state.checkin} nights={this.state.nights} handleSearch={this.handleSearch} />
           </Route>
           <Route exact path="/roomsList">
             <RoomsList data={this.state.data} />

@@ -11,7 +11,7 @@ function UserForm(props) {
 
   function handleChangeDate(ev) {
     props.handleChange({
-      date: ev.target.value
+      checkin: ev.target.value
     });
   }
 
@@ -75,7 +75,7 @@ function UserForm(props) {
             className="form-control"
             id="date-checkIn"
             name="date-checkIn"
-            value={props.date}
+            value={props.checkin}
             onChange={handleChangeDate} />
         </div>
       </div>
