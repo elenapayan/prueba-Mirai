@@ -7,20 +7,22 @@ function RoomsList(props) {
   if (props.data) {
     return (
       <ul className="card">
-        {props.data.map((room, key) => {
-          return (
-            <RoomsDetails
-              key={key}
-              roomName={room.roomName}
-              offerName={room.offerName}
-              boardName={room.boardName}
-              occupancyAdults={room.occupancy.numAdults}
-              occupancyChilds={room.occupancy.numChilds}
-              occupancyBabies={room.occupancy.numBabies}
-              netPrice={room.netPrice}
-            />
-          )
-        })}
+        {props.data
+          .sort((a, b) => a.netPrice - b.netPrice)
+          .map((room, key) => {
+            return (
+              <RoomsDetails
+                key={key}
+                roomName={room.roomName}
+                offerName={room.offerName}
+                boardName={room.boardName}
+                occupancyAdults={room.occupancy.numAdults}
+                occupancyChilds={room.occupancy.numChilds}
+                occupancyBabies={room.occupancy.numBabies}
+                netPrice={room.netPrice}
+              />
+            )
+          })}
       </ul>
     )
   } else {
