@@ -77,6 +77,7 @@ function UserForm(props) {
             name="date-checkIn"
             value={props.checkin}
             onChange={handleChangeDate}
+            required
           />
         </div>
       </div>
@@ -91,7 +92,10 @@ function UserForm(props) {
             min="1"
             max="30"
             value={props.nights}
+            placeholder="1"
+            required
             onChange={handleChangeNights}
+
           />
         </div>
       </div>
