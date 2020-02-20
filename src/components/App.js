@@ -12,7 +12,8 @@ class App extends React.Component {
       data: [],
       hotelId: "",
       checkin: "",
-      nights: ""
+      nights: "",
+      validatedForm: ""
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -29,7 +30,8 @@ class App extends React.Component {
 
 
   formValidated() {
-    const { hotelId, nights } = this.state;
+    const hotelId = this.state.hotelId;
+    const nights = parseInt(this.state.nights);
     let checkin = this.state.checkin;
     checkin = checkin.split("-").join("");
     const f = new Date();
@@ -40,15 +42,21 @@ class App extends React.Component {
     }
     const day = f.getDate().toString();
     const date = (year + month + day);
-    if (hotelId && (checkin >= date) && nights) {
-      return true;
+    if (hotelId && (checkin >= date) && (nights >= 1) && (nights <= 30)) {
+      this.setState({
+        validatedForm: true
+      });
     } else {
-      return false;
+      this.setState({
+        validatedForm: false
+      });
     }
   }
 
   handleChange(data) {
-    this.setState(data)
+    this.setState(data, () => {
+      this.formValidated();
+    })
   }
 
   handleSearch(ev) {
@@ -56,7 +64,7 @@ class App extends React.Component {
     const nights = parseInt(this.state.nights);
     const checkin = (this.state.checkin).split("-").reverse().join("/");
     const url = `https://api-pre.mirai.com/MiraiWebService/availableRate/get?hotelId=${hotelId}&checkin=${checkin}&nights=${nights}`;
-    if (this.formValidated() === true) {
+    if (!!this.state.validatedForm === true) {
       fetch(url, {
         headers: { 'Authorization': `Basic ${btoa('user1:user1Pass')}` }
       })
@@ -69,17 +77,18 @@ class App extends React.Component {
       // .catch(error => console.log("error"));
     } else {
       ev.preventDefault();
-      return console.log("Lo sentimos, no hay tarifas disponibles");
+      return (
+        <p>Lo sentimos, no hay tarifas disponibles APP+</p>
+      )
     }
   }
 
 
   render() {
     console.log(this.state.data);
-    this.formValidated();
+    console.log(this.state.validatedForm)
     return (
       <React.Fragment>
-
         <Switch>
           <Route exact path="/">
             <UserForm handleChange={this.handleChange} hotelId={this.state.hotelId} checkin={this.state.checkin} nights={this.state.nights} handleSearch={this.handleSearch} />

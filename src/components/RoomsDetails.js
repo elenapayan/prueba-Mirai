@@ -2,7 +2,6 @@ import React from 'react';
 
 
 function RoomsDetails(props) {
-
   return (
     <li className="list-group-item">
       <h3 className="list-group-item">Room: {props.roomName}</h3>

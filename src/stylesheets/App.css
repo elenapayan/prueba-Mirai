@@ -26,6 +26,9 @@
   width: 250px;
   height: 250px;
 }
+.list-group-item {
+  max-width: 350px;
+}
 .list-item {
   text-align: center;
 }

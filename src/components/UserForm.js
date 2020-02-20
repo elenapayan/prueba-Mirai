@@ -76,7 +76,8 @@ function UserForm(props) {
             id="date-checkIn"
             name="date-checkIn"
             value={props.checkin}
-            onChange={handleChangeDate} />
+            onChange={handleChangeDate}
+          />
         </div>
       </div>
       <div className="form-group row">

@@ -3,8 +3,8 @@ import RoomsDetails from './RoomsDetails';
 
 
 function RoomsList(props) {
-  console.log(props);
-  if (props.data.length > 0) {
+  console.log(props.data);
+  if (props.data) {
     return (
       <ul className="card">
         {props.data.map((room, key) => {
@@ -23,10 +23,9 @@ function RoomsList(props) {
         })}
       </ul>
     )
-  }
-  else {
+  } else {
     return (
-      <p>Lo sentimos, no hay tarifas disponibles</p>
+      <p>Lo sentimos, no hay tarifas disponibles roomList</p>
     )
   }
 }
