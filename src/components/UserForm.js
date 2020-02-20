@@ -36,6 +36,7 @@ function UserForm(props) {
                   id="44069509"
                   name="hotel"
                   value={props.hotelId}
+                  required
                   onChange={handleChangeHotel}
                 />
                 Hotel Baqueira Val de Neu</label>
@@ -48,6 +49,7 @@ function UserForm(props) {
                   id="10030559"
                   name="hotel"
                   value={props.hotelId}
+                  required
                   onChange={handleChangeHotel}
                 />
                 Hotel Moderno</label>
@@ -60,6 +62,7 @@ function UserForm(props) {
                   id="100376478"
                   name="hotel"
                   value={props.hotelId}
+                  required
                   onChange={handleChangeHotel}
                 />
                 Hotel Grand Luxor</label>
@@ -76,8 +79,8 @@ function UserForm(props) {
             id="date-checkIn"
             name="date-checkIn"
             value={props.checkin}
-            onChange={handleChangeDate}
             required
+            onChange={handleChangeDate}
           />
         </div>
       </div>
@@ -95,18 +98,18 @@ function UserForm(props) {
             placeholder="1"
             required
             onChange={handleChangeNights}
-
           />
         </div>
       </div>
       <div className="form-group row">
         <div className="col-sm-10">
           <Link to="/roomsList">
-            <button type="button" className="btn btn-primary" onClick={props.handleSearch}>Buscar oferta más barata!</button>
+            <button className="btn btn-primary" onClick={props.handleSearch}>Buscar oferta más barata!</button>
           </Link>
         </div>
       </div>
     </form >
+
   )
 }
 
