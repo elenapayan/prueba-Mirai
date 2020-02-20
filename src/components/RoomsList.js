@@ -1,6 +1,6 @@
 import React from 'react';
 import RoomsDetails from './RoomsDetails';
-
+import { Link } from 'react-router-dom';
 
 function RoomsList(props) {
   console.log(props.data);
@@ -27,7 +27,12 @@ function RoomsList(props) {
     )
   } else {
     return (
-      <p>Lo sentimos, no hay tarifas disponibles roomList</p>
+      <React.Fragment>
+        <p>Lo sentimos, no hay tarifas disponibles</p>
+        <Link to="/">
+          <button onClick={props.handleReset}>Volver</button>
+        </Link>
+      </React.Fragment>
     )
   }
 }

@@ -17,6 +17,7 @@ class App extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
   // componentDidMount() {
   //   fetch('https://api-pre.mirai.com/MiraiWebService/availableRate/get?hotelId=10030559&checkin=05/03/2020&nights=2', {
@@ -59,7 +60,7 @@ class App extends React.Component {
     })
   }
 
-  handleSearch(ev) {
+  handleSearch() {
     const hotelId = parseInt(this.state.hotelId);
     const nights = parseInt(this.state.nights);
     const checkin = (this.state.checkin).split("-").reverse().join("/");
@@ -74,15 +75,22 @@ class App extends React.Component {
             data: data.availableRates[hotelId]
           });
         })
-      // .catch(error => console.log("error"));
     } else {
-      ev.preventDefault();
-      return (
-        <p>Lo sentimos, no hay tarifas disponibles APP+</p>
-      )
+      this.setState({
+        data: false
+      });
     }
   }
 
+  handleReset() {
+    this.setState({
+      data: [],
+      hotelId: "",
+      checkin: "",
+      nights: "",
+      validatedForm: ""
+    });
+  }
 
   render() {
     console.log(this.state.data);
@@ -93,8 +101,8 @@ class App extends React.Component {
           <Route exact path="/">
             <UserForm handleChange={this.handleChange} hotelId={this.state.hotelId} checkin={this.state.checkin} nights={this.state.nights} handleSearch={this.handleSearch} />
           </Route>
-          <Route exact path="/roomsList">
-            <RoomsList data={this.state.data} />
+          <Route path="/roomsList">
+            <RoomsList data={this.state.data} handleReset={this.handleReset} />
           </Route>
         </Switch>
       </React.Fragment>
