@@ -11,16 +11,19 @@ function RoomsList(props) {
           .sort((a, b) => a.netPrice - b.netPrice)
           .map((room, key) => {
             return (
-              <RoomsDetails
-                key={key}
-                roomName={room.roomName}
-                offerName={room.offerName}
-                boardName={room.boardName}
-                occupancyAdults={room.occupancy.numAdults}
-                occupancyChilds={room.occupancy.numChilds}
-                occupancyBabies={room.occupancy.numBabies}
-                netPrice={room.netPrice}
-              />
+              <React.Fragment>
+                <Link to="/"><span>&lt;</span> Volver</Link>
+                <RoomsDetails
+                  key={key}
+                  roomName={room.roomName}
+                  offerName={room.offerName}
+                  boardName={room.boardName}
+                  occupancyAdults={room.occupancy.numAdults}
+                  occupancyChilds={room.occupancy.numChilds}
+                  occupancyBabies={room.occupancy.numBabies}
+                  netPrice={room.netPrice}
+                />
+              </React.Fragment>
             )
           })}
       </ul>
