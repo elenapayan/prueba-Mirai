@@ -1,3 +1,5 @@
+/* FORM */
+
 .form-container {
   margin: auto;
   padding: 30px 50px;
@@ -7,6 +9,13 @@
 }
 .col-sm-2 {
   min-width: 180px;
+}
+
+/* ROOM-CARD */
+
+.card {
+  border: none;
+  margin: 30px 50px;
 }
 .cards-container {
   display: flex;
@@ -32,7 +41,18 @@
 .list-item {
   text-align: center;
 }
-.occupancy-items {
-  display: inline-block;
-  margin: 0 5px;
+.occupancy-item {
+  margin-left: 10px;
+}
+
+/* BUTTONS */
+
+.btn {
+  margin-left: 50px;
+}
+
+/* ERROR MESSAGE */
+
+.error-msg {
+  padding: 30px 0 30px 50px;
 }

@@ -1,34 +1,24 @@
 import React from 'react';
 import '../stylesheets/App.css';
-// import { fetchAPI } from '../services/DataService';
 import { Switch, Route } from 'react-router-dom';
 import UserForm from './UserForm';
-import RoomsList from './RoomsList';
+import ShowRoom from './ShowRoom';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: false,
       hotelId: "",
       checkin: "",
       nights: "",
-      validatedForm: ""
+      validatedForm: "",
+      showResults: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
-  // componentDidMount() {
-  //   fetch('https://api-pre.mirai.com/MiraiWebService/availableRate/get?hotelId=10030559&checkin=05/03/2020&nights=2', {
-  //     headers: { 'Authorization': `Basic ${btoa('user1:user1Pass')}` }
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log('returns:', data);
-  //     });
-  // }
-
 
   formValidated() {
     const hotelId = this.state.hotelId;
@@ -71,13 +61,22 @@ class App extends React.Component {
       })
         .then((response) => response.json())
         .then(data => {
-          this.setState({
-            data: data.availableRates[hotelId]
-          });
+          if (data.availableRates[hotelId]) {
+            this.setState({
+              data: data.availableRates[hotelId],
+              showResults: true
+            });
+          } else {
+            this.setState({
+              data: false,
+              showResults: false
+            });
+          }
         })
     } else {
       this.setState({
-        data: false
+        data: false,
+        showResults: false
       });
     }
   }
@@ -101,8 +100,8 @@ class App extends React.Component {
           <Route exact path="/">
             <UserForm handleChange={this.handleChange} hotelId={this.state.hotelId} checkin={this.state.checkin} nights={this.state.nights} handleSearch={this.handleSearch} />
           </Route>
-          <Route path="/roomsList">
-            <RoomsList data={this.state.data} handleReset={this.handleReset} />
+          <Route path="/ShowRoom">
+            <ShowRoom data={this.state.data} showResults={this.state.showResults} validatedForm={this.state.validatedForm} handleReset={this.handleReset} />
           </Route>
         </Switch>
       </React.Fragment>

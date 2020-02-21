@@ -21,7 +21,6 @@ function UserForm(props) {
     });
   }
 
-
   return (
     <React.Fragment>
       <form className="form-container" action="" method="get">
@@ -96,7 +95,7 @@ function UserForm(props) {
               min="1"
               max="30"
               value={props.nights}
-              placeholder="1"
+              placeholder="Ej: 1"
               required
               onChange={handleChangeNights}
             />
@@ -105,8 +104,8 @@ function UserForm(props) {
       </form >
       <div className="form-group row">
         <div className="col-sm-10">
-          <Link to="/roomsList">
-            <button className="btn btn-primary" onClick={props.handleSearch}>Buscar oferta más barata!</button>
+          <Link to="/ShowRoom">
+            <button className="btn btn-primary" onClick={props.handleSearch}>Buscar</button>
           </Link>
         </div>
       </div>
